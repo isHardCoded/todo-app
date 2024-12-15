@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ToDoApp.DataAccess;
+using ToDoApp.Services;
 using Task = ToDoApp.DataAccess.Task;
 
 namespace ToDoApp.Controllers
@@ -8,24 +8,24 @@ namespace ToDoApp.Controllers
     [Route("[controller]")]
     public class TasksController : ControllerBase
     {
-        private readonly ToDoDbContext dbContext;
+        private readonly ITaskService taskService;
 
-        public TasksController(ToDoDbContext dbContext)
+        public TasksController(ITaskService taskService)
         {
-            this.dbContext = dbContext;
+            this.taskService = taskService;
         }
 
         [HttpGet]
         public Task[] Get()
         {
-            return dbContext.Tasks.ToArray();
+            return taskService.Get();
         }
 
         // /tasks/id
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var task = dbContext.Tasks.SingleOrDefault(x=>x.Id == id);
+            var task = taskService.GetById(id);
             if (task == null)
             {
                 return NotFound();
@@ -37,28 +37,20 @@ namespace ToDoApp.Controllers
         [HttpPost]
         public void Add([FromBody] Task task)
         {
-            dbContext.Tasks.Add(task);
-            dbContext.SaveChanges();
+            taskService.Add(task);
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            var task = dbContext.Tasks.SingleOrDefault(x => x.Id == id);
-            if (task != null)
-            {
-                dbContext.Tasks.Remove(task);
-                dbContext.SaveChanges();
-            }
-
+            taskService.Delete(id);
             return Ok();
         }
 
         [HttpPut]
         public void Put(Task task)
         {
-            dbContext.Tasks.Update(task);
-            dbContext.SaveChanges();
+            taskService.Put(task);
         }
     }
 }

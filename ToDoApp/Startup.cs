@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ToDoApp.DataAccess;
+using ToDoApp.Services;
 
 namespace ToDoApp
 {
@@ -14,6 +15,7 @@ namespace ToDoApp
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<ITaskService, TaskService>();
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
