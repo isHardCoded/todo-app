@@ -15,7 +15,7 @@ public partial class ToDoDbContext : DbContext
     {
     }
 
-    public virtual DbSet<Task> Users { get; set; }
+    public virtual DbSet<Task> Tasks { get; set; }
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -24,7 +24,7 @@ public partial class ToDoDbContext : DbContext
         {
             entity.HasKey(e => e.Id).HasName("User_pkey");
 
-            entity.ToTable("User");
+            entity.ToTable("Task");
 
             entity.Property(e => e.Id).HasColumnName("id");
             entity.Property(e => e.Description)

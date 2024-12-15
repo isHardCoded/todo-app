@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ToDoApp.DataAccess;
 
 namespace ToDoApp.Controllers
 {
@@ -6,10 +7,17 @@ namespace ToDoApp.Controllers
     [Route("[controller]")]
     public class TasksController : ControllerBase
     {
+        private readonly ToDoDbContext dbContext;
+
+        public TasksController(ToDoDbContext dbContext)
+        {
+            this.dbContext = dbContext;
+        }
+
         [HttpGet]
         public string[] GetTasks()
         {
-            return new[] { "1", "2", "3" };
+            return dbContext.Tasks.Select(x => x.Title).ToArray();
         } 
     }
 }
