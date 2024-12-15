@@ -1,4 +1,7 @@
-﻿namespace ToDoApp
+﻿using Microsoft.EntityFrameworkCore;
+using ToDoApp.DataAccess;
+
+namespace ToDoApp
 {
     public class Startup
     {
@@ -7,6 +10,11 @@
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+
+            services.AddDbContext<ToDoDbContext>(optionsBuilder =>
+            {
+                optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Username=postgres;Password=rootroot;Database=postgres;");
+            });
 
         }
 
