@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ToDoApp.DataAccess;
+using ToDoApp.Services;
 using Task = ToDoApp.DataAccess.Task;
 
 namespace ToDoApp.Controllers
@@ -8,17 +8,49 @@ namespace ToDoApp.Controllers
     [Route("[controller]")]
     public class TasksController : ControllerBase
     {
-        private readonly ToDoDbContext dbContext;
+        private readonly ITaskService taskService;
 
-        public TasksController(ToDoDbContext dbContext)
+        public TasksController(ITaskService taskService)
         {
-            this.dbContext = dbContext;
+            this.taskService = taskService;
         }
 
         [HttpGet]
-        public Task[] GetTasks()
+        public Task[] Get()
         {
-            return dbContext.Tasks.ToArray();
-        } 
+            return taskService.Get();
+        }
+
+        // /tasks/id
+        [HttpGet("{id}")]
+        public IActionResult GetById(int id)
+        {
+            var task = taskService.GetById(id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(task);
+        }
+
+        [HttpPost]
+        public void Add([FromBody] Task task)
+        {
+            taskService.Add(task);
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            taskService.Delete(id);
+            return Ok();
+        }
+
+        [HttpPut]
+        public void Put(Task task)
+        {
+            taskService.Put(task);
+        }
     }
 }
