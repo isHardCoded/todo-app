@@ -6,6 +6,7 @@ namespace ToDoApp.Controllers
     [Route("[controller]")]
     public class TasksController : ControllerBase
     {
+        [HttpGet]
         public string[] GetTasks()
         {
             return new[] { "1", "2", "3" };
