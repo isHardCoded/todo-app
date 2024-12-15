@@ -4,6 +4,7 @@
     {
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
 
         }
 
@@ -14,7 +15,7 @@
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapGet("/", () => "Hello World!");
-                // endpoints.MapControllers();
+                endpoints.MapControllers();
             });
         }
     }
