@@ -10,10 +10,28 @@
 		max-width: 330px;
 		flex-wrap: wrap;
 
-		li {
-			border-radius: 10px;
+		.red {
 			background-color: #ff6868;
 			color: #682c2c;
+		}
+
+		.yellow {
+			background-color: #fffa68;
+			color: #68662c;
+		}
+
+		.green {
+			background-color: #79ff6d;
+			color: #2c6835;
+		}
+
+		.blue {
+			background-color: #bbfaff;
+			color: #45777a;
+		}
+
+		li {
+			border-radius: 10px;
 			padding: 1px 20px 1px 20px;
 			font-size: 14px;
 		}
