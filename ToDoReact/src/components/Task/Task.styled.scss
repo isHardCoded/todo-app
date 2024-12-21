@@ -1,0 +1,60 @@
+.task__block {
+	display: flex;
+	padding: 15px;
+	border: 1px #c7c7c7 solid;
+	background-color: #ffffff;
+	flex-direction: column;
+	border-radius: 15px;
+	width: 300px;
+	gap: 10px;
+
+	transition: 0.2s ease;
+
+	&:hover {
+		background-color: rgb(245, 245, 245);
+		transition: 0.2s ease;
+		cursor: pointer;
+	}
+
+	.task__title {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+
+		h3 {
+			font-size: 14px;
+		}
+
+		p {
+			font-size: 12px;
+		}
+	}
+
+	.task__user {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+
+		h3 {
+			font-size: 14px;
+		}
+
+		p {
+			font-size: 12px;
+		}
+	}
+
+	.task__project {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+
+		h3 {
+			font-size: 14px;
+		}
+
+		p {
+			font-size: 12px;
+		}
+	}
+}
