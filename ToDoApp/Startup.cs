@@ -25,6 +25,8 @@ namespace ToDoApp
                 optionsBuilder.UseNpgsql(_configuration.GetConnectionString("MyDbConnection"));
             });
 
+            services.AddCors();
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env) 
@@ -32,7 +34,14 @@ namespace ToDoApp
 
             app.UseSwagger();
             app.UseSwaggerUI();
-            
+
+            app.UseCors(builder =>
+            {
+                builder.WithOrigins("http://localhost:5173") 
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            });
+
             app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
