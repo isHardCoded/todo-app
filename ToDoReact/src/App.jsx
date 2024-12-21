@@ -2,9 +2,16 @@ import React from 'react'
 import './App.scss'
 import Task from './components/Task/Task'
 import Navbar from './components/Navbar/Navbar'
+import Create from './components/Create/Create'
 
 function App() {
 	const [tasks, setTasks] = React.useState([])
+	const [openCreateWindow, setOpenCreateWindow] = React.useState(false)
+
+	const handleOpen = () => {
+		setOpenCreateWindow(openCreateWindow => !openCreateWindow)
+		console.log('Working!')
+	}
 
 	const fetchData = async () => {
 		try {
@@ -27,7 +34,7 @@ function App() {
 
 	return (
 		<div className='wrapper'>
-			<Navbar />
+			<Navbar handleClick={handleOpen} />
 			<div className='task__content'>
 				<div className='status__ns'>
 					<h4>Необходимо сделать</h4>
@@ -66,6 +73,7 @@ function App() {
 					</div>
 				</div>
 			</div>
+			<Create />
 		</div>
 	)
 }
