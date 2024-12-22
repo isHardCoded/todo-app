@@ -20,4 +20,6 @@ public partial class Task
     public DateTimeOffset StartDate { get; set; }
 
     public DateTimeOffset EndDate { get; set; }
+    
+    public User AuthorUser { get; set; }
 }

@@ -31,6 +31,11 @@ namespace ToDoApp.Migrations.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("AuthorUserId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasDefaultValue(1);
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasMaxLength(300)
@@ -67,6 +72,8 @@ namespace ToDoApp.Migrations.Migrations
                     b.HasKey("Id")
                         .HasName("User_pkey");
 
+                    b.HasIndex("AuthorUserId");
+
                     b.ToTable("Task", (string)null);
                 });
 
@@ -92,6 +99,22 @@ namespace ToDoApp.Migrations.Migrations
                             Id = 1,
                             UserName = "Test"
                         });
+                });
+
+            modelBuilder.Entity("ToDoApp.DataAccess.Task", b =>
+                {
+                    b.HasOne("ToDoApp.DataAccess.User", "AuthorUser")
+                        .WithMany("Tasks")
+                        .HasForeignKey("AuthorUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AuthorUser");
+                });
+
+            modelBuilder.Entity("ToDoApp.DataAccess.User", b =>
+                {
+                    b.Navigation("Tasks");
                 });
 #pragma warning restore 612, 618
         }
