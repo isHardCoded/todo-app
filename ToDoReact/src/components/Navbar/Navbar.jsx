@@ -19,7 +19,7 @@ const Navbar = ({ handleClick }) => {
 					</li>
 				</ul>
 			</nav>
-			<button onClick={() => handleClick}>Создать</button>
+			<button onClick={() => handleClick()}>Создать</button>
 		</div>
 	)
 }
