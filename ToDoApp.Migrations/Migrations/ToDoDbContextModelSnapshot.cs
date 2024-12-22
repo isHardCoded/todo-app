@@ -69,6 +69,30 @@ namespace ToDoApp.Migrations.Migrations
 
                     b.ToTable("Task", (string)null);
                 });
+
+            modelBuilder.Entity("ToDoApp.DataAccess.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            UserName = "Test"
+                        });
+                });
 #pragma warning restore 612, 618
         }
     }

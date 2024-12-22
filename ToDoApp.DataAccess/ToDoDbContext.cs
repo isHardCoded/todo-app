@@ -46,6 +46,14 @@ public partial class ToDoDbContext : DbContext
                 .HasColumnName("title");
         });
 
+        modelBuilder.Entity<User>()
+            .HasData(
+                new User
+                {
+                    Id = 1,
+                    UserName = "Test"
+                }
+        );
         OnModelCreatingPartial(modelBuilder);
     }
 
