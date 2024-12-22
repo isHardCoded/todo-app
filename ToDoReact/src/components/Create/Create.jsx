@@ -14,6 +14,7 @@ const Create = () => {
 			title,
 			description,
 			startTime: new Date().toISOString(),
+			status: 1,
 			deadline,
 		}
 
@@ -29,9 +30,6 @@ const Create = () => {
 			if (!response.ok) {
 				throw new Error('Не удалось создать задачу')
 			}
-
-			const createdTask = await response.json()
-			onTaskCreated(createdTask)
 
 			setTitle('')
 			setDescription('')
