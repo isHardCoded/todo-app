@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
+using ToDoApp.Messages.Requests;
 using ToDoApp.Services;
 using Task = ToDoApp.DataAccess.Task;
 
@@ -9,10 +11,12 @@ namespace ToDoApp.Controllers
     public class TasksController : ControllerBase
     {
         private readonly ITaskService taskService;
+        private readonly IMapper _mapper;
 
-        public TasksController(ITaskService taskService)
+        public TasksController(ITaskService taskService, IMapper mapper)
         {
             this.taskService = taskService;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -35,8 +39,10 @@ namespace ToDoApp.Controllers
         }
 
         [HttpPost]
-        public void Add([FromBody] Task task)
+        public void Add([FromBody] TaskRequest request)
         {
+            var task = _mapper.Map<Task>(request);
+            task.StartDate = DateTime.UtcNow;
             taskService.Add(task);
         }
 

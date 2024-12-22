@@ -73,7 +73,7 @@ function App() {
 					</div>
 				</div>
 			</div>
-			<Create />
+			{<Create />}
 		</div>
 	)
 }

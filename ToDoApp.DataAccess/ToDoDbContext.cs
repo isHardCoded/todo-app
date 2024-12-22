@@ -44,8 +44,18 @@ public partial class ToDoDbContext : DbContext
             entity.Property(e => e.Title)
                 .HasMaxLength(150)
                 .HasColumnName("title");
+            entity.Property("AuthorUserId")
+                .HasDefaultValue(1);
         });
 
+        modelBuilder.Entity<User>()
+            .HasData(
+                new User
+                {
+                    Id = 1,
+                    UserName = "Test"
+                }
+        );
         OnModelCreatingPartial(modelBuilder);
     }
 

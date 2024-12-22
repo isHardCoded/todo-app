@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ToDoApp.DataAccess;
 
-public partial class Task
+public class Task
 {
     public int Id { get; set; }
 
@@ -20,4 +20,6 @@ public partial class Task
     public DateTimeOffset StartDate { get; set; }
 
     public DateTimeOffset EndDate { get; set; }
+    
+    public User AuthorUser { get; set; }
 }
