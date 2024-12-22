@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using ToDoApp.Configuration;
 using ToDoApp.DataAccess;
 using ToDoApp.Services;
 
@@ -15,6 +16,12 @@ namespace ToDoApp
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAutoMapper(typeof(Startup));
+            /*services.AddAutoMapper(expression =>
+            {
+                expression.AddProfile<MapperProfile>();
+            });*/
+            
             services.AddScoped<ITaskService, TaskService>();
             services.AddControllers();
             services.AddEndpointsApiExplorer();

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ToDoApp.DataAccess;
 
-public partial class Task
+public class Task
 {
     public int Id { get; set; }
 
