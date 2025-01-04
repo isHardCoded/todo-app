@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using ToDoApp.DataAccess.Entities;
 using ToDoApp.Messages.Requests;
 using ToDoApp.Services;
-using Task = ToDoApp.DataAccess.Task;
 
 namespace ToDoApp.Controllers
 {
@@ -20,7 +20,7 @@ namespace ToDoApp.Controllers
         }
 
         [HttpGet]
-        public Task[] Get()
+        public TaskEntity[] Get()
         {
             return taskService.Get();
         }
@@ -41,7 +41,7 @@ namespace ToDoApp.Controllers
         [HttpPost]
         public void Add([FromBody] TaskRequest request)
         {
-            var task = _mapper.Map<Task>(request);
+            var task = _mapper.Map<TaskEntity>(request);
             task.StartDate = DateTime.UtcNow;
             taskService.Add(task);
         }
@@ -54,7 +54,7 @@ namespace ToDoApp.Controllers
         }
 
         [HttpPut]
-        public void Put(Task task)
+        public void Put(TaskEntity task)
         {
             taskService.Put(task);
         }

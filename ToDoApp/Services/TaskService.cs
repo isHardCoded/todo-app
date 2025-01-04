@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using ToDoApp.DataAccess;
-using Task = ToDoApp.DataAccess.Task;
+﻿using ToDoApp.DataAccess.Contexts;
+using ToDoApp.DataAccess.Entities;
 
 namespace ToDoApp.Services
 {
@@ -12,7 +11,7 @@ namespace ToDoApp.Services
         {
             this.dbContext = dbContext;
         }
-        public void Add(Task task)
+        public void Add(TaskEntity task)
         {
             dbContext.Tasks.Add(task);
             dbContext.SaveChanges();
@@ -28,17 +27,17 @@ namespace ToDoApp.Services
             }
         }
 
-        public Task[] Get()
+        public TaskEntity[] Get()
         {
             return dbContext.Tasks.ToArray();
         }
 
-        public Task GetById(int id)
+        public TaskEntity GetById(int id)
         {
             return dbContext.Tasks.SingleOrDefault(x => x.Id == id);
         }
 
-        public void Put(Task task)
+        public void Put(TaskEntity task)
         {
             dbContext.Tasks.Update(task);
             dbContext.SaveChanges();

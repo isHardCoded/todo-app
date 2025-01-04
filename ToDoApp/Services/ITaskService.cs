@@ -1,17 +1,17 @@
-﻿using Task = ToDoApp.DataAccess.Task;
+﻿using ToDoApp.DataAccess.Entities;
 
 namespace ToDoApp.Services
 {
     public interface ITaskService
     {
-        Task[] Get();
+        TaskEntity[] Get();
 
-        Task GetById(int id);
+        TaskEntity GetById(int id);
 
-        void Add(Task task);
+        void Add(TaskEntity task);
 
         void Delete(int id);
 
-        void Put(Task task);
+        void Put(TaskEntity task);
     }
 }

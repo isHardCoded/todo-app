@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
-using ToDoApp.DataAccess;
+using ToDoApp.DataAccess.Contexts;
 
 namespace ToDoApp.Migrations;
 

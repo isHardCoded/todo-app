@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
+using ToDoApp.DataAccess.Entities;
 
-namespace ToDoApp.DataAccess;
+namespace ToDoApp.DataAccess.Contexts;
 
-public partial class ToDoDbContext : DbContext
+public class ToDoDbContext : DbContext
 {
     public ToDoDbContext()
     {
@@ -15,13 +14,13 @@ public partial class ToDoDbContext : DbContext
     {
     }
 
-    public virtual DbSet<Task> Tasks { get; set; }
+    public virtual DbSet<TaskEntity> Tasks { get; set; }
 
-    public virtual DbSet<User> Users { get; set; }
+    public virtual DbSet<UserEntity> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Task>(entity =>
+        modelBuilder.Entity<TaskEntity>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("User_pkey");
 
@@ -61,11 +60,11 @@ public partial class ToDoDbContext : DbContext
                 .HasForeignKey(d => d.AuthorUserId);
         });
 
-        modelBuilder.Entity<User>(entity => { entity.ToTable("User"); });
+        modelBuilder.Entity<UserEntity>(entity => { entity.ToTable("User"); });
 
-        modelBuilder.Entity<User>()
+        modelBuilder.Entity<UserEntity>()
             .HasData(
-                new User
+                new UserEntity
                 {
                     Id = 1,
                     UserName = "Test"

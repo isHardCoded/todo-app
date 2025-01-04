@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿namespace ToDoApp.DataAccess.Entities;
 
-namespace ToDoApp.DataAccess;
-
-public class Task
+public class TaskEntity
 {
     public int Id { get; set; }
 
@@ -25,7 +22,7 @@ public class Task
 
     public DateTimeOffset EndDate { get; set; }
 
-    public virtual User AuthorUser { get; set; }
+    public virtual UserEntity AuthorUser { get; set; }
 
-    public virtual User? AssignedUser { get; set; }
+    public virtual UserEntity? AssignedUser { get; set; }
 }

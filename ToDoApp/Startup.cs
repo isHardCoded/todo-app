@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ToDoApp.Configuration;
-using ToDoApp.DataAccess;
+using ToDoApp.DataAccess.Contexts;
 using ToDoApp.Services;
 
 namespace ToDoApp
