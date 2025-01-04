@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ToDoApp.DataAccess.Contexts;
+using ToDoApp.DataAccess.Repositories;
 using ToDoApp.Services;
 
 namespace ToDoApp
@@ -21,6 +22,7 @@ namespace ToDoApp
                 expression.AddProfile<MapperProfile>();
             });*/
             
+            services.AddScoped<ITaskRepository, TaskRepository>();
             services.AddScoped<ITaskService, TaskService>();
             services.AddControllers();
             services.AddEndpointsApiExplorer();

@@ -1,4 +1,5 @@
 ﻿using ToDoApp.DataAccess.Entities;
+using ToDoApp.Models;
 
 namespace ToDoApp.Services
 {
@@ -8,10 +9,10 @@ namespace ToDoApp.Services
 
         TaskEntity GetById(int id);
 
-        void Add(TaskEntity task);
+        void Add(TaskModel task);
 
         void Delete(int id);
 
-        void Put(TaskEntity task);
+        void Update(TaskModel task);
     }
 }

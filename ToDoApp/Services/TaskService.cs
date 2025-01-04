@@ -1,46 +1,45 @@
-﻿using ToDoApp.DataAccess.Contexts;
+﻿using AutoMapper;
 using ToDoApp.DataAccess.Entities;
+using ToDoApp.DataAccess.Repositories;
+using ToDoApp.Models;
 
 namespace ToDoApp.Services
 {
     public class TaskService : ITaskService
     {
-        private readonly ToDoDbContext _dbContext;
+        private readonly ITaskRepository _taskRepository;
+        private readonly IMapper _mapper;
 
-        public TaskService(ToDoDbContext dbContext)
+        public TaskService(ITaskRepository taskRepository, IMapper mapper)
         {
-            _dbContext = dbContext;
+            _taskRepository = taskRepository;
+            _mapper = mapper;
         }
-        public void Add(TaskEntity task)
+
+        public void Add(TaskModel task)
         {
-            _dbContext.Tasks.Add(task);
-            _dbContext.SaveChanges();
+            task.StartDate = DateTime.UtcNow;
+            _taskRepository.Add(_mapper.Map<TaskEntity>(task));
         }
 
         public void Delete(int id)
         {
-            var task = _dbContext.Tasks.SingleOrDefault(x => x.Id == id);
-            if (task != null)
-            {
-                _dbContext.Tasks.Remove(task);
-                _dbContext.SaveChanges();
-            }
+            _taskRepository.Delete(id);
         }
 
         public TaskEntity[] Get()
         {
-            return _dbContext.Tasks.ToArray();
+            return _taskRepository.Get();
         }
 
         public TaskEntity GetById(int id)
         {
-            return _dbContext.Tasks.SingleOrDefault(x => x.Id == id);
+            return _taskRepository.GetById(id);
         }
 
-        public void Put(TaskEntity task)
+        public void Update(TaskModel task)
         {
-            _dbContext.Tasks.Update(task);
-            _dbContext.SaveChanges();
+            _taskRepository.Put(_mapper.Map<TaskEntity>(task));
         }
     }
 }

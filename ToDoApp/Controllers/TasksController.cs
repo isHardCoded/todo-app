@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using ToDoApp.DataAccess.Entities;
 using ToDoApp.Messages.Requests;
+using ToDoApp.Models;
 using ToDoApp.Services;
 
 namespace ToDoApp.Controllers
@@ -41,8 +42,7 @@ namespace ToDoApp.Controllers
         [HttpPost]
         public void Add([FromBody] TaskRequest request)
         {
-            var task = _mapper.Map<TaskEntity>(request);
-            task.StartDate = DateTime.UtcNow;
+            var task = _mapper.Map<TaskModel>(request);
             _taskService.Add(task);
         }
 
@@ -54,9 +54,9 @@ namespace ToDoApp.Controllers
         }
 
         [HttpPut]
-        public void Put(TaskEntity task)
+        public void Put(TaskModel task)
         {
-            _taskService.Put(task);
+            _taskService.Update(task);
         }
     }
 }
