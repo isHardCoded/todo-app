@@ -17,6 +17,7 @@ public partial class ToDoDbContext : DbContext
 
     public virtual DbSet<Task> Tasks { get; set; }
 
+    public virtual DbSet<User> Users { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -26,7 +27,11 @@ public partial class ToDoDbContext : DbContext
 
             entity.ToTable("Task");
 
+            entity.HasIndex(e => e.AuthorUserId, "IX_Task_AuthorUserId");
+
             entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.AuthorUserId).HasDefaultValue(1);
             entity.Property(e => e.Description)
                 .HasMaxLength(300)
                 .HasColumnName("description");
@@ -44,9 +49,19 @@ public partial class ToDoDbContext : DbContext
             entity.Property(e => e.Title)
                 .HasMaxLength(150)
                 .HasColumnName("title");
-            entity.Property("AuthorUserId")
-                .HasDefaultValue(1);
+
+            entity
+                .HasOne(d => d.AssignedUser)
+                .WithMany(p => p.TaskAssignedUsers)
+                .HasForeignKey(d => d.AssignedUserId);
+
+            entity
+                .HasOne(d => d.AuthorUser)
+                .WithMany(p => p.TaskAuthorUsers)
+                .HasForeignKey(d => d.AuthorUserId);
         });
+
+        modelBuilder.Entity<User>(entity => { entity.ToTable("User"); });
 
         modelBuilder.Entity<User>()
             .HasData(
@@ -55,9 +70,6 @@ public partial class ToDoDbContext : DbContext
                     Id = 1,
                     UserName = "Test"
                 }
-        );
-        OnModelCreatingPartial(modelBuilder);
+            );
     }
-
-    partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 }

@@ -19,7 +19,13 @@ public class Task
 
     public DateTimeOffset StartDate { get; set; }
 
+    public int AuthorUserId { get; set; }
+
+    public int? AssignedUserId { get; set; }
+
     public DateTimeOffset EndDate { get; set; }
-    
-    public User AuthorUser { get; set; }
+
+    public virtual User AuthorUser { get; set; }
+
+    public virtual User? AssignedUser { get; set; }
 }

@@ -6,5 +6,7 @@ public class User
 
     public string UserName { get; set; }
     
-    public List<Task> Tasks { get; set; }
+    public virtual ICollection<Task> TaskAssignedUsers { get; set; } = new List<Task>();
+
+    public virtual ICollection<Task> TaskAuthorUsers { get; set; } = new List<Task>();
 }
