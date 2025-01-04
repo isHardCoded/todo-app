@@ -1,18 +1,17 @@
 ﻿using ToDoApp.DataAccess.Entities;
 using ToDoApp.Models;
 
-namespace ToDoApp.Services
+namespace ToDoApp.Services;
+
+public interface ITaskService
 {
-    public interface ITaskService
-    {
-        TaskEntity[] Get();
+    TaskEntity[] Get();
 
-        TaskEntity GetById(int id);
+    TaskEntity GetById(int id);
 
-        void Add(TaskModel task);
+    void Add(TaskModel task);
 
-        void Delete(int id);
+    void Delete(int id);
 
-        void Update(TaskModel task);
-    }
+    void Update(TaskModel task);
 }
