@@ -10,26 +10,26 @@ namespace ToDoApp.Controllers
     [Route("[controller]")]
     public class TasksController : ControllerBase
     {
-        private readonly ITaskService taskService;
+        private readonly ITaskService _taskService;
         private readonly IMapper _mapper;
 
         public TasksController(ITaskService taskService, IMapper mapper)
         {
-            this.taskService = taskService;
+            _taskService = taskService;
             _mapper = mapper;
         }
 
         [HttpGet]
         public TaskEntity[] Get()
         {
-            return taskService.Get();
+            return _taskService.Get();
         }
 
         // /tasks/id
         [HttpGet("{id}")]
         public IActionResult GetById(int id)
         {
-            var task = taskService.GetById(id);
+            var task = _taskService.GetById(id);
             if (task == null)
             {
                 return NotFound();
@@ -43,20 +43,20 @@ namespace ToDoApp.Controllers
         {
             var task = _mapper.Map<TaskEntity>(request);
             task.StartDate = DateTime.UtcNow;
-            taskService.Add(task);
+            _taskService.Add(task);
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            taskService.Delete(id);
+            _taskService.Delete(id);
             return Ok();
         }
 
         [HttpPut]
         public void Put(TaskEntity task)
         {
-            taskService.Put(task);
+            _taskService.Put(task);
         }
     }
 }

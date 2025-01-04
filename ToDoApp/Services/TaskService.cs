@@ -5,42 +5,42 @@ namespace ToDoApp.Services
 {
     public class TaskService : ITaskService
     {
-        private readonly ToDoDbContext dbContext;
+        private readonly ToDoDbContext _dbContext;
 
         public TaskService(ToDoDbContext dbContext)
         {
-            this.dbContext = dbContext;
+            _dbContext = dbContext;
         }
         public void Add(TaskEntity task)
         {
-            dbContext.Tasks.Add(task);
-            dbContext.SaveChanges();
+            _dbContext.Tasks.Add(task);
+            _dbContext.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            var task = dbContext.Tasks.SingleOrDefault(x => x.Id == id);
+            var task = _dbContext.Tasks.SingleOrDefault(x => x.Id == id);
             if (task != null)
             {
-                dbContext.Tasks.Remove(task);
-                dbContext.SaveChanges();
+                _dbContext.Tasks.Remove(task);
+                _dbContext.SaveChanges();
             }
         }
 
         public TaskEntity[] Get()
         {
-            return dbContext.Tasks.ToArray();
+            return _dbContext.Tasks.ToArray();
         }
 
         public TaskEntity GetById(int id)
         {
-            return dbContext.Tasks.SingleOrDefault(x => x.Id == id);
+            return _dbContext.Tasks.SingleOrDefault(x => x.Id == id);
         }
 
         public void Put(TaskEntity task)
         {
-            dbContext.Tasks.Update(task);
-            dbContext.SaveChanges();
+            _dbContext.Tasks.Update(task);
+            _dbContext.SaveChanges();
         }
     }
 }
